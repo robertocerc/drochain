@@ -38,12 +38,14 @@
                     autoplay="{true}"
                     loop
                     muted
-                    className="absolute w-full h-screen opacity-40"
+                    class="absolute w-full h-screen opacity-40"
                 ></video>
-                <div class="flex flex-col justify-center items-center">
+                <div
+                    class="absolute w-full mx-auto flex flex-col justify-center items-center"
+                >
                     <div class="space-y-6 py-12">
                         <h1
-                            class="text-indigo-800 text-3xl text-center px-5 md:px-20"
+                            class="text-indigo-800 text-3xl text-center mt-12 px-5 md:px-20"
                         >
                             Blockchain-based Reliable Storage
                         </h1>

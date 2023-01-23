@@ -1,12 +1,5 @@
 <template>
     <NavigationBar />
-    <!-- <video
-        src="cloud-bg.mp4"
-        autoplay="{true}"
-        loop
-        muted
-        className="absolute w-full h-screen opacity-40"
-    ></video> -->
     <HomePage />
     <FooterSection />
 </template>

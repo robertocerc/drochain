@@ -16,6 +16,12 @@
                                     scope="col"
                                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                                 >
+                                    Title
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                >
                                     Hash
                                 </th>
                                 <th
@@ -41,7 +47,7 @@
                         <tbody>
                             <tr
                                 class="border-b"
-                                v-for="(d, i) in $store.state.userDocs"
+                                v-for="(d, i) in uDocs"
                                 :key="i"
                             >
                                 <td
@@ -49,14 +55,24 @@
                                 >
                                     {{ i + 1 }}
                                 </td>
-                                <a
-                                    class="px-6 py-4 whitespace-nowrap cursor-pointer text-sm font-medium text-indigo-900"
-                                    @click.prevent="
-                                        showOnIPFS(hashToCID(d.docHash))
-                                    "
+                                <td
+                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                 >
-                                    {{ truncateHash(hashToCID(d.docHash)) }}
-                                </a>
+                                    <!-- {{ fetchHashDetails(d.docHash) }} -->
+                                    {{ uDocTitle[i] }}
+                                </td>
+                                <td
+                                    class="text-sm font-light px-6 py-4 whitespace-nowrap"
+                                >
+                                    <a
+                                        class="whitespace-nowrap cursor-pointer text-sm font-medium text-indigo-900 my-auto h-full"
+                                        @click.prevent="
+                                            showOnIPFS(hashToCID(d.docHash))
+                                        "
+                                    >
+                                        {{ truncateHash(hashToCID(d.docHash)) }}
+                                    </a>
+                                </td>
                                 <td
                                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                 >
@@ -115,13 +131,33 @@ export default {
     setup(props) {
         const store = useStore();
         const data = ref(null);
+        const uDocs = ref([]);
+        const uDocTitle = ref([]);
 
         onBeforeMount(async () => {
+            await store.dispatch("getDocs");
             data.value = await props.docData;
-            console.log(data.value);
+            uDocs.value = store.state.userDocs;
+            getHashDetails().then((e) => {
+                uDocTitle.value = e;
+            });
         });
 
         const hashToCID = (x) => store.state.web3.utils.hexToAscii(x);
+        function getHashDetails() {
+            const newDocs = uDocs.value.map(
+                async (o) =>
+                    await fetchHashDetails(o.docHash).then((res) => res)
+            );
+            return Promise.all(newDocs);
+        }
+
+        async function fetchHashDetails(x) {
+            const { name } = await fetch(
+                `https://ipfs.io/ipfs/${hashToCID(x)}`
+            ).then((res) => res.json());
+            return name;
+        }
 
         const truncateHash = (x) =>
             `${x.substring(0, 7)}...${x.substring(x.length - 4)}`;
@@ -182,6 +218,9 @@ export default {
             getValidDate,
             previewDoc,
             downloadDoc,
+            fetchHashDetails,
+            uDocs,
+            uDocTitle,
         };
     },
 };

@@ -123,7 +123,6 @@ export default {
             const res = await store.dispatch("subscribe", {
                 subCycle: noOfCycles.value < 1 ? 1 : noOfCycles.value,
             });
-            console.log(res);
             isLoading.value = false;
         }
 

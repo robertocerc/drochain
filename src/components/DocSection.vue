@@ -14,31 +14,31 @@
                                 </th>
                                 <th
                                     scope="col"
-                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                                 >
                                     Title
                                 </th>
                                 <th
                                     scope="col"
-                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                                 >
                                     Hash
                                 </th>
                                 <th
                                     scope="col"
-                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                                 >
                                     Date Added
                                 </th>
                                 <th
                                     scope="col"
-                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                                 >
                                     Preview
                                 </th>
                                 <th
                                     scope="col"
-                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                                 >
                                     Download
                                 </th>
@@ -56,16 +56,15 @@
                                     {{ i + 1 }}
                                 </td>
                                 <td
-                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                    class="text-sm text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                 >
-                                    <!-- {{ fetchHashDetails(d.docHash) }} -->
                                     {{ uDocTitle[i] }}
                                 </td>
                                 <td
-                                    class="text-sm font-light px-6 py-4 whitespace-nowrap"
+                                    class="text-sm text-center mx-auto font-light px-6 py-4 whitespace-nowrap"
                                 >
                                     <a
-                                        class="whitespace-nowrap cursor-pointer text-sm font-medium text-indigo-900 my-auto h-full"
+                                        class="whitespace-nowrap cursor-pointer text-sm text-center mx-auto font-medium text-indigo-900 my-auto h-full"
                                         @click.prevent="
                                             showOnIPFS(hashToCID(d.docHash))
                                         "
@@ -74,7 +73,7 @@
                                     </a>
                                 </td>
                                 <td
-                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                    class="text-sm text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                 >
                                     {{ getValidDate(d.timeNotarized) }}
                                 </td>
@@ -84,7 +83,7 @@
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 576 512"
-                                        class="cursor-pointer w-4 h-4"
+                                        class="cursor-pointer w-4 h-4 mx-auto"
                                         role="img"
                                         @click.prevent="
                                             previewDoc(hashToCID(d.docHash))
@@ -101,7 +100,7 @@
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512"
-                                        class="cursor-pointer w-4 h-4"
+                                        class="cursor-pointer w-4 h-4 mx-auto"
                                         role="img"
                                         @click="
                                             downloadDoc(hashToCID(d.docHash))
